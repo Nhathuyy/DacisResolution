@@ -56,6 +56,38 @@
     a:hover {
       text-decoration: underline;
     }
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+        text-align: center;
+        background-color: #f7f7f7;
+      }
+  
+      h1 {
+        color: #333;
+      }
+  
+      p {
+        color: #555;
+      }
+  
+      #goBackButton {
+        display: inline-block;
+        padding: 12px 24px;
+        margin-top: 20px;
+        background-color: #3498db;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        font-size: 16px;
+      }
+  
+      #goBackButton:hover {
+        background-color: #2980b9;
+      }
   </style>
 </head>
 <body>
@@ -74,6 +106,14 @@
       <h2>GitHub</h2>
       <p><a href="https://github.com/dacis1" target="_blank">github.com/dacis1</a></p>
     </div>
+    <button id="goBackButton" onclick="goBack()">Go Back</button>
+
   </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </body>
 </html>

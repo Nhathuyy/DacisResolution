@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
     <title>ESRAN By Chí Phạm</title>
     <script>
         let current_network = null;
@@ -30,134 +31,123 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-          
+            <a class="navbar-brand rainbow-text" href="/about.html">Giới thiệu</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li ><a href="/about.html">Giới thiệu</a></li>
-                <li ><a href="#">ESRGAN Resolution</a></li>
+
+                <li><a href="#">ESRGAN Resolution</a></li>
                 <li><a href="https://arxiv.org/abs/1809.00219">Papper</a></li>
-               <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
+                <li><a href="/overview.html">Tổng quan</a></li>
+
     </div>
 </nav>
 
-    <div class="container">
+<div class="container">
 
+  
+    <div style="background-color: #fff; color: #fff; margin-top:-13%" id="clientinfopanel" class="panel">
+            
+        <div style="color: #fff;" class="panel-body">
+            <pre style="color: #fff;" id="clientinfodata">
+            </pre>
+        </div>
+    </div>
 
+    
 
+    <hr style="clear: both">
+    <div class="col-md-12" id="networksList">
 
-        <hr style="clear: both">
-        <div class="col-md-12" id="networksList">
-            <!-- <div class="col-sm-2">
-                <div class="panel panel-default networkpanel">
-                    <div class="panel-body text-center">
-                        <h6>RRDB ESRGAN</h6>
-                        <img style="width: 100%;" src="static/img/nn_esrgan.png">
-                        <button class="btn btn-primary btn-sm networkload" data-networkname="RRDB_ESRGAN_x4" disabled>LOAD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="panel panel-default networkpanel">
-                    <div class="panel-body text-center">
-                        <h6>RRDB PSNR</h6>
-                        <img style="width: 100%;" src="static/img/nn_psnr.png">
-                        <button class="btn btn-primary btn-sm networkload" data-networkname="RRDB_PSNR_x4" disabled>LOAD</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="panel panel-default networkpanel">
-                    <div class="panel-body text-center">
-                        <h6>Real GAN x4plus Anime</h6>
-                        <img style="width: 100%;" src="static/img/nn_anime.png">
-                        <button class="btn btn-primary btn-sm networkload" data-networkname="RealESRGAN_x4plus_anime_6B" disabled>LOAD</button>
-                    </div>
-                </div>
-            </div> -->
-            <div class="col-sm-4">
-                <div class="panel panel-default networkpanel">
-                    <div class="panel-body text-center">
-                        <h3>ESRGAN</h3>
-                        <img style="width: 100%;" src="static/img/nn_real_plus.png">
-                        <button class="btn btn-primary btn-sm networkload" data-networkname="RealESRGAN_x4plus" disabled>LOAD</button>
-                    </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default networkpanel">
+                <div class="panel-body text-center">
+                    <h6>ESRGAN</h6>
+                    <img style="width: 100%;" src="static/img/nn_real_plus.png">
+                    <button class="btn btn-primary btn-sm networkload" data-networkname="RealESRGAN_x4plus" disabled>LOAD</button>
                 </div>
             </div>
         </div>
-        <hr style="clear: both">
+ 
+    </div>
+    <hr style="clear: both">
+    <div class="col-md-12">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <pre id="dataload_status">Khởi tạo...</pre>
+            <pre id="dataload_status">Khởi tạo...</pre>
+        </div>
+        <div class="col-md-12">
+            <progress id="download_progress" value=""></progress>
+        </div>
+        <div class="col-sm-3">
+            <span>Mem usage:</span><span id="memusage">N/A</span>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="numDenseBlocks">Số lớp (giảm để thời gian chạy nhanh hơn)</label>
+                <input type="number" class="form-control" id="numDenseBlocks" min="1" max="23" step="1" value="23">
             </div>
-            <div class="col-md-12">
-                <progress id="download_progress" value=""></progress>
-            </div>
-            <div class="col-sm-3">
-                <span>Mem usage:</span><span id="memusage">N/A</span>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="numDenseBlocks">Số lớp (giảm để thời gian chạy nhanh hơn)</label>
-                    <input type="number" class="form-control" id="numDenseBlocks" min="1" max="23" step="1" value="23">
+        </div>
+    </div>
+    <br style="clear: both">
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Demo ESRGAN</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="demo_img/baboon_sm.png" id="sm_img" class="btn btn-default" crossorigin="anonymous" style="display: none;">
+                    <button type="button" id="demo1" disabled>Test hình ảnh nhỏ </button>
+                    <img src="demo_img/baboon.png" id="med_img" class="btn btn-default" crossorigin="anonymous" style="display: none;">
+                    <button type="button" id="demo2" disabled>Test hình ảnh trung bình</button>
+                    <img src="demo_img/448x299.jpg" id="lrg_img" class="btn btn-default" crossorigin="anonymous" style="display: none;">
+                    <button type="button" id="demo3" disabled>Test hình ảnh lớn</button>
                 </div>
             </div>
         </div>
-        <br style="clear: both">
-
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Demo ESRGAN</h3>
-                    </div>
-                    <div class="panel-body">
-                        <img src="demo_img/baboon_sm.png" id="sm_img" class="btn btn-default" crossorigin="anonymous" style="display: none;">
-                        <button type="button" id="demo1" disabled>Kiểm tra hình ảnh nhỏ  </button>
-                        <img src="demo_img/baboon.png" id="med_img" class="btn btn-default" crossorigin="anonymous" style="display: none;">
-                        <button type="button" id="demo2" disabled>Kiểm tra hình ảnh trung bình</button>
-                        <img src="demo_img/448x299.jpg" id="lrg_img" class="btn btn-default" crossorigin="anonymous" style="display: none;">
-                        <button type="button" id="demo3" disabled>Kiểm tra hình ảnh lớn</button>
-                    </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tải lên hình ảnh lên (hiện hỗ trợ kích thước 400px x 400px)</h3>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Tải lên hình ảnh lên (hiện hỗ trợ kích thước 400px x 400px)</h3>
-                    </div>
-                    <div class="panel-body">
-                        <input id="imageUpload" name="imageUpload" type="file" disabled>
-                        <button type="button" class="btn btn-default" id="mannualrerun" disabled>Chạy lại </button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Kết quả</h3>
-                    </div>
-                    <div class="panel-body" id="resultpanel">
-                        <canvas id="original"></canvas>
-<!--                        <div id="networkrunningloader" class="lds-dual-ring"></div>-->
-                        <p id="resultInfo" style="display: none;">
-                            <span style="float: left;"><span>Đã tải lên</span>
-                            <button type="button" id="downloadResultBtn" class="btn btn-success">⟱ Tải xuống kết quả ⟱</button>
-                            </span><span id="dlborder"></span></p>
-                        <canvas id="result"></canvas>
-                    </div>
+                <div class="panel-body">
+                    <input id="imageUpload" name="imageUpload" type="file" disabled>
+                    <button type="button" class="btn btn-default" id="mannualrerun" disabled>Chạy lại</button>
                 </div>
             </div>
         </div>
 
     </div>
 
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Kết quả</h3>
+                </div>
+                <div class="panel-body" id="resultpanel">
+                    <canvas id="original"></canvas>
+<!--                        <div id="networkrunningloader" class="lds-dual-ring"></div>-->
+                    <p id="resultInfo" style="display: none;">
+                        <span style="float: left;"><span>Đã tải lên</span><button type="button" id="downloadResultBtn" class="btn btn-success">⟱ Tải xuống kết quả ⟱</button></span><span id="dlborder"></span></p>
+                    <canvas id="result"></canvas>
+                </div>
+            </div>
+        </div>
+<!--            <div class="col-md-9">-->
+<!--                <div class="panel panel-primary">-->
+<!--                    <div class="panel-heading">-->
+<!--                        <h3 class="panel-title">Result</h3>-->
+<!--                    </div>-->
+<!--                    <div class="panel-body">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+    </div>
+
+</div>
 
 
 
